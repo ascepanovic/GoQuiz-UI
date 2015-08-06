@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="js/angular.js"></script>
+    <script src="js/socket.io.js"></script>
+    <script src="js/angular-sockets.js"></script>
+
+    <script type="application/javascript">
+        var app = angular.module('quiz', ['socket.io']);
+
+        app.config(function ($socketProvider) {
+            $socketProvider.setConnectionUrl('http://localhost:4555/socket.io');
+        });
+    </script>
+</head>
+<body>
+    <div ng-app="quiz" ng-controller="ControllerQuestions">
+
+      <!--list of all questions here-->
+      <ul>
+        <li ng-repeat="q in questions">
+          {{ q.title + ', ' + q.answer }}
+        </li>
+      </ul>
+
+    </div>
+
+
+    <script src="js/logic.js"></script>
+
+    <script>
+        //sockets are still not stable so we are not sending this request like this...
+        //var socket = io('http://127.0.1:4555/socket.io');
+        //  socket.on('event', function (data) {
+        // console.log(data);
+        //    socket.emit('my other event', { my: 'data' });
+        //});
+  </script>
+
+</body>
+</html>
