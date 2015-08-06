@@ -2,15 +2,9 @@
 <html>
 <head>
     <script src="js/angular.js"></script>
-    <script src="js/socket.io.js"></script>
-    <script src="js/angular-sockets.js"></script>
 
     <script type="application/javascript">
-        var app = angular.module('quiz', ['socket.io']);
-
-        app.config(function ($socketProvider) {
-            $socketProvider.setConnectionUrl('http://localhost:4555/socket.io');
-        });
+        var app = angular.module('quiz', []);
     </script>
 </head>
 <body>
@@ -23,6 +17,11 @@
         </li>
       </ul>
 
+
+      Socket stuff:
+      <pre id="output">see console</pre>
+
+
     </div>
 
 
@@ -30,11 +29,18 @@
 
     <script>
         //sockets are still not stable so we are not sending this request like this...
-        //var socket = io('http://127.0.1:4555/socket.io');
-        //  socket.on('event', function (data) {
-        // console.log(data);
-        //    socket.emit('my other event', { my: 'data' });
-        //});
+        url = 'ws://localhost:4555/ws';
+        c = new WebSocket(url);
+
+        c.onmessage = function(msg){
+          console.log(msg)
+        }
+
+        c.onopen = function(){
+          setInterval(
+            function(){ c.send("Some string there") }
+          , 1000 )
+        }
   </script>
 
 </body>
