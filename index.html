@@ -19,29 +19,19 @@
 
 
       Socket stuff:
-      <pre id="output">see console</pre>
+
+      <form ng-submit="submit()">
+        Enter some text wich u want to send to server:
+        <input type="text" ng-model="text" name="text" />
+        <input type="submit" id="submit" value="Submit" />
+        <pre>list={{list}}</pre>
+      </form>
 
 
     </div>
 
 
     <script src="js/logic.js"></script>
-
-    <script>
-        //sockets are still not stable so we are not sending this request like this...
-        url = 'ws://localhost:4555/ws';
-        c = new WebSocket(url);
-
-        c.onmessage = function(msg){
-          console.log(msg)
-        }
-
-        c.onopen = function(){
-          setInterval(
-            function(){ c.send("Some string there") }
-          , 1000 )
-        }
-  </script>
 
 </body>
 </html>
